@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NPC.Ally;
+using NPC.Enemy;
 
 public class Admin : MonoBehaviour {
 
-   // public GameObject player;
+    // public GameObject player;
 
+    public Person per;
+    public const int max = 25;
 	// Use this for initialization
 	void Start () {
+        int p = Random.Range(5, 16);
+        per = new Person(p);
+        int rnd2 = Random.Range(p, max);
+
         GameObject player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
       //  se crea el heroey todos sus componentes
         player.AddComponent<Hero>();
@@ -19,11 +27,11 @@ public class Admin : MonoBehaviour {
         player.GetComponent<Rigidbody>().freezeRotation = true;
 
         //el rango entre los diferentes zombies y ciudadanos
-        int x = Random.Range(10, 20);
+       // int x = Random.Range(10, 20);
 
 
         //el zar de aparicion de ciudadanos y zombies
-        for (int i = 0; i < x; i++)
+        for (int i = 0; i < rnd2; i++)
         {
             GameObject npc = GameObject.CreatePrimitive(PrimitiveType.Cube);
             npc.transform.position = new Vector3(Random.Range(-45, 45), 0.5f, Random.Range(-45, 45));

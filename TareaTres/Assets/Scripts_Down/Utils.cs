@@ -12,7 +12,7 @@ public enum BodyParts {
 
 //el movimiento
 public enum Behaviour { 
-    Quieto, Moviendo
+    Quieto, Moviendo, Rotando
 }
 
 //Enumeracion de nombres de ciudadanos
@@ -26,6 +26,7 @@ public struct InformacionZombie {
     public string color;
     public BodyParts parteFavorita;
     public Behaviour behaviour;
+    public Vector3 rotacion;
 }
 
 //structura de datos de zombie
@@ -33,3 +34,25 @@ public struct InformacionCiudadano {
     public int edadciudadano;
     public NameCiudadanos nameciudadano;
 }
+
+
+// del randon del mini randon al maximo constante
+public struct Person 
+{
+public readonly int rndIni;
+    public Person(int rnd) {
+        rndIni = rnd;
+    }
+}
+
+//Velocidad randon del hero
+public struct InfoHero {
+    public readonly float speedHero;
+
+    public InfoHero(float speed) {
+        speedHero = speed;
+    }
+   
+}
+
+
