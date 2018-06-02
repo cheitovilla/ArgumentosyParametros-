@@ -12,7 +12,7 @@ public class FPSMove : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-        float s = Random.Range(1f, 4f);
+        float s = Random.Range(2f, 6f);
         speedhero = new InfoHero(s);
     }
 	
@@ -21,16 +21,16 @@ public class FPSMove : MonoBehaviour {
         //Definimos los movimientos en el teclado
         if (Input.GetKey(KeyCode.W))
         {
-			transform.position += transform.forward* speedhero.speedHero;
+			transform.position += transform.forward* speedhero.speedHero* Time.deltaTime;
         }
 		if (Input.GetKey(KeyCode.S)) {
-			transform.position -= transform.forward * speedhero.speedHero;
+			transform.position -= transform.forward * speedhero.speedHero * Time.deltaTime;
 		}
 		if (Input.GetKey(KeyCode.A)) {
-			transform.position -= transform.right * speedhero.speedHero;
+			transform.position -= transform.right * speedhero.speedHero * Time.deltaTime;
 		}
 		if (Input.GetKey(KeyCode.D)) {
-			transform.position += transform.right * speedhero.speedHero;
+			transform.position += transform.right * speedhero.speedHero * Time.deltaTime;
 		}
 	}
 }

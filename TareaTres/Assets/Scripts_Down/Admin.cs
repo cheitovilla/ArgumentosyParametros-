@@ -3,24 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using NPC.Ally;
 using NPC.Enemy;
+using UnityEngine.UI;
 
 public class Admin : MonoBehaviour {
-
+    int zom = 0;
+    int ciu = 0;
     // public GameObject player;
+    public GameObject[] cubos;
+    public Text enemies;
+    public Text ciudadaneishons;
 
     public Person per;
     public const int max = 25;
 	// Use this for initialization
 	void Start () {
+        
         int p = Random.Range(5, 16);
         per = new Person(p);
         int rnd2 = Random.Range(p, max);
-
+        cubos = new GameObject[rnd2];
         GameObject player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
       //  se crea el heroey todos sus componentes
         player.AddComponent<Hero>();
         player.tag = "Hero";
         player.AddComponent<Camera>();
+      //  Camera cam = new Camera();
+      //  cam.transform.position = new Vector3 (player.transform.position.x, player.transform.position.y, 0);
         player.AddComponent<FPSMove>();
         player.AddComponent<FPSAim>();
         player.AddComponent<Rigidbody>();
@@ -40,18 +48,34 @@ public class Admin : MonoBehaviour {
             int tipe = Random.Range(0, 2);
             if (tipe == 0)
             {
+                ciu = ciu + 1;
                 npc.name = "Ciudadano";
                 npc.tag = "Ciudadano";
                 npc.AddComponent<Ciudadaneishon>();
             }
             else
             {
-               //Zombie
+                zom = zom + 1;
+                //Zombie
                 npc.name = "Zombie";
                 npc.tag = "Zombie";
                 npc.AddComponent<Zombie>();
                 npc.AddComponent<Rigidbody>();
                 npc.GetComponent<Rigidbody>().freezeRotation = true;
+            }
+            cubos[i] = npc;
+            foreach (GameObject go in cubos)
+            {
+
+                
+                if (tipe == 0)
+                {
+                    ciudadaneishons.text = "Enemys: " + ciu.ToString();
+                }
+                else
+                {
+                    enemies.text = "Ciudadaneishons: " + zom.ToString();
+                }
             }
         }
 	}
