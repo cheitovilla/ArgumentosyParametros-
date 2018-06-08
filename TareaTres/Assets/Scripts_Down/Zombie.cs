@@ -4,13 +4,10 @@ using UnityEngine;
 
 namespace NPC
 {
-
     namespace Enemy
     {
-
         public class Zombie : MonoBehaviour
         {
-
             //se definen variables a utilizar llamadas desde el utils
             string colorName = "";
             BodyParts parteFav;
@@ -22,14 +19,17 @@ namespace NPC
                 int randon = Random.Range(0, 3);
                 switch (randon)
                 {
+                    //Color cyan
                     case 0:
                         colorName = "Cyan";
                         GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
                         break;
+                    //Color Verde
                     case 1:
                         colorName = "Green";
                         GetComponent<Renderer>().material.SetColor("_Color", Color.green);
                         break;
+                    //Color Magenta
                     default:
                         colorName = "Magenta";
                         GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
@@ -37,43 +37,37 @@ namespace NPC
                 }
                 //el azar de las diferentes partes del cuerpo
                 parteFav = (BodyParts)Random.Range(0, 5);
-
-
                 StartCoroutine(HazMovimiento());
             }
 
-            // Update is called once per frame
+            //Aqui estan switcheando los diferentes metodos de movimientos 
             void Update()
             {
                 switch (behaviour)
                 {
-
                     case Behaviour.Quieto:
                         break;
-
                     case Behaviour.Moviendo:
                         Mover();
                         break;
-
                     case Behaviour.Rotando:
                         Rotando();
                         break;
                 }
             }
 
-           // Vector3 direccion = Vector3.forward;
             float velocidad = 5;
             float velocityRotation = 50;
 
+            //metodo de mover
             void Mover()
             {
-                Debug.Log("Estoy moviendo");
                 transform.Translate(Vector3.forward*velocidad * Time.deltaTime); 
-                    //direccion * velocidad * Time.deltaTime);
             }
 
-            void Rotando() {
-                Debug.Log("Estoy rotando");
+            //Metodo de rotar
+            void Rotando()
+            {
                 transform.eulerAngles += (infozombi.rotacion * velocityRotation * Time.deltaTime);
             }
 

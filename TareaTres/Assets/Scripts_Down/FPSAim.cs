@@ -8,14 +8,9 @@ public class FPSAim : MonoBehaviour {
     float mouseY;
     public bool IntervedMouse;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
 
     // Update is called once per frame
     void Update() {
-     
 
         //Movimiento del mouse
         mouseX += Input.GetAxis("Mouse X");
@@ -27,8 +22,6 @@ public class FPSAim : MonoBehaviour {
         {
             mouseY -= Input.GetAxis("Mouse Y");
         }
-    //    Debug.Log(mouseX);
-
        //la rotacion
         transform.eulerAngles = new Vector3(mouseY, mouseX, 0);
 

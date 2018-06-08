@@ -6,56 +6,48 @@ using NPC.Enemy;
 using UnityEngine.UI;
 
 public class Admin : MonoBehaviour {
+    // se definen variables a utilizar
     int zom = 0;
     int ciu = 0;
-    // public GameObject player;
     public GameObject[] cubos;
     public Text enemies;
     public Text ciudadaneishons;
-
     public Person per;
     public const int max = 25;
-	// Use this for initialization
-	void Start () {
-        
+
+	void Start ()
+    {
+        //variables del randon a utilizar
         int p = Random.Range(5, 16);
         per = new Person(p);
         int rnd2 = Random.Range(p, max);
         cubos = new GameObject[rnd2];
         GameObject player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-      //  se crea el heroey todos sus componentes
+
+      //  se crea el heroe y todos sus componentes
         player.AddComponent<Hero>();
         player.tag = "Hero";
         player.AddComponent<Camera>();
-      //  Camera cam = new Camera();
-      //  cam.transform.position = new Vector3 (player.transform.position.x, player.transform.position.y, 0);
         player.AddComponent<FPSMove>();
         player.AddComponent<FPSAim>();
         player.AddComponent<Rigidbody>();
         player.GetComponent<Rigidbody>().freezeRotation = true;
 
-        //el rango entre los diferentes zombies y ciudadanos
-       // int x = Random.Range(10, 20);
-
-
-        //el zar de aparicion de ciudadanos y zombies
+        //el azar de aparicion de ciudadanos y zombies
         for (int i = 0; i < rnd2; i++)
         {
             GameObject npc = GameObject.CreatePrimitive(PrimitiveType.Cube);
             npc.transform.position = new Vector3(Random.Range(-45, 45), 0.5f, Random.Range(-45, 45));
-
-            //ciudadano
             int tipe = Random.Range(0, 2);
             if (tipe == 0)
             {
-                ciu = ciu + 1;
+              //Ciudadano
                 npc.name = "Ciudadano";
                 npc.tag = "Ciudadano";
                 npc.AddComponent<Ciudadaneishon>();
             }
             else
             {
-                zom = zom + 1;
                 //Zombie
                 npc.name = "Zombie";
                 npc.tag = "Zombie";
@@ -64,24 +56,27 @@ public class Admin : MonoBehaviour {
                 npc.GetComponent<Rigidbody>().freezeRotation = true;
             }
             cubos[i] = npc;
-            foreach (GameObject go in cubos)
+            
+        }
+        //el foreach que piden utilizar en el documento para el conteo de ciudadanos y zombies
+        foreach (GameObject pri in cubos)
+        {
+            GameObject go = pri as GameObject;
+            if (go.tag == "Ciudadano")
             {
-
-                
-                if (tipe == 0)
-                {
-                    ciudadaneishons.text = "Enemys: " + ciu.ToString();
-                }
-                else
-                {
-                    enemies.text = "Ciudadaneishons: " + zom.ToString();
-                }
+                ciu += 1;
+            }
+            else if (go.tag == "Zombie")
+            {
+                zom += 1;
             }
         }
-	}
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    //Aqui se muestran en el canvas la cantidad de zombies y ciudadanos
+	void Update ()
+    {
+        ciudadaneishons.text = "Enemys: " + zom.ToString();
+        enemies.text = "Ciudadaneishons: " + ciu.ToString();
+    }
 }

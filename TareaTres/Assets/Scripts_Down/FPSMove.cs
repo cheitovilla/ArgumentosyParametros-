@@ -5,12 +5,9 @@ using UnityEngine;
 public class FPSMove : MonoBehaviour {
 
     //Definimos una velocidad
-	public float speed = 0.2f;
-
     InfoHero speedhero;
 
     
-	// Use this for initialization
 	void Start () {
         float s = Random.Range(2f, 6f);
         speedhero = new InfoHero(s);
